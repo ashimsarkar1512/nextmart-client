@@ -54,19 +54,17 @@ export const loginUser=async (userData:FieldValues)=>{
 }
 
 
-export const getCurrentUser=async()=>{
-   const accessToken=(await cookies()).get("accessToken")!.value
-   let decodedData=null
+export const getCurrentUser = async () => {
+  const accessToken = (await cookies()).get("accessToken")?.value;
+  let decodedData = null;
 
-   if(accessToken){
-      decodedData=await jwtDecode(accessToken);
-      return decodedData
-   }
-
-   else{
-      return null;
-   }
- } 
+  if (accessToken) {
+    decodedData = await jwtDecode(accessToken);
+    return decodedData;
+  } else {
+    return null;
+  }
+};
 
 
  export const reCaptchaTokenVerification = async (token: string) => {
@@ -89,3 +87,7 @@ export const getCurrentUser=async()=>{
      return Error(err);
    }
  };
+
+ export const logout = async () => {
+  (await cookies()).delete("accessToken");
+};
