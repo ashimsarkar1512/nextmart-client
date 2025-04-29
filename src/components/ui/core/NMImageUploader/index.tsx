@@ -1,38 +1,57 @@
-import React, { useState } from "react";
-import { Input } from "../../input";
+"use client";
 
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
-const NMImageUploader = () => {
+type TImageUploader = {
+  label?: string;
+  className?: string;
+  setImageFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  setImagePreview: React.Dispatch<React.SetStateAction<string[]>>;
+};
 
-            const [ImageFiles,SetImageFiles]=useState<File[]|[]>([])
+const NMImageUploader = ({
+  label = "Upload Images",
+  className,
+  setImageFiles,
+  setImagePreview,
+}: TImageUploader) => {
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files![0];
 
-            const handleChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
+    setImageFiles((prev) => [...prev, file]);
 
-                        const file=event.target.files![0]
+    if (file) {
+      const reader = new FileReader();
 
-                        SetImageFiles((prev)=>[...prev,file])
+      reader.onloadend = () => {
+        setImagePreview((prev) => [...prev, reader.result as string]);
+      };
 
-            }
-            return (
-                        <div>
-                              <Input 
-                              onChange={handleChange}
-                              type="file"
-                              multiple
-                              accept="image/*"
-                              className="hidden"
+      reader.readAsDataURL(file);
+    }
 
-                              id="image-uploader"
-                              >
-                              </Input> 
-                              <label
+    event.target.value = "";
+  };
+
+  return (
+    <div className={cn("flex flex-col items-center w-full gap-4", className)}>
+      <Input
+        id="image-upload"
+        type="file"
+        accept="image/*"
+        multiple
+        className="hidden"
+        onChange={handleImageChange}
+      />
+      <label
         htmlFor="image-upload"
         className="w-full h-36 md:size-36 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer text-center text-sm text-gray-500 hover:bg-gray-50 transition"
       >
-     upload logo
-      </label>     
-                        </div>
-            );
+        {label}
+      </label>
+    </div>
+  );
 };
 
-export default NMImageUploader ;
+export default NMImageUploader;
