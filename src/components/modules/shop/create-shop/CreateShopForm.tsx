@@ -11,18 +11,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
 
-
-
+import NMImageUploader from "@/components/ui/core/NMImageUploader";
 import { useState } from "react";
-
-
+import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
+import { createShop } from "@/services/Shop";
 import { toast } from "sonner";
 import Logo from "@/app/assets/svgs/logo";
-import { Textarea } from "@/components/ui/textarea";
-import NMImageUploader from "@/components/ui/core/NMImageUploader";
-import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
-import { createShop, CreateShop } from "@/services/Shop";
 
 export default function CreateShopForm() {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
@@ -51,7 +47,7 @@ export default function CreateShopForm() {
       formData.append("data", JSON.stringify(modifiedData));
       formData.append("logo", imageFiles[0] as File);
 
-      const res = await createShop (formData);
+      const res = await createShop(formData);
 
       console.log(res);
 
