@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import CategoryCard from "@/components/ui/core/CategoryCard";
+import NMContainer from "@/components/ui/core/NMContainer";
 import { getAllCategories } from "@/services/Category";
 import { ICategory } from "@/types";
 import Link from "next/link";
@@ -7,7 +8,8 @@ import Link from "next/link";
 const Category = async () => {
   const { data: categories } = await getAllCategories();
   return (
-    <div className="container mx-auto my-20">
+   <NMContainer className="my-20">
+             <div className="container mx-auto my-20">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-2xl">Category</h2>
         <Link href="/products">
@@ -24,6 +26,7 @@ const Category = async () => {
           ))}
       </div>
     </div>
+   </NMContainer>
   );
 };
 
