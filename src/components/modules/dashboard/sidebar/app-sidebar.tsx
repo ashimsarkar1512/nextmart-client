@@ -26,6 +26,7 @@ import { NavUser } from "./nav-user";
 import Link from "next/link";
 import Logo from "@/app/assets/svgs/logo";
 
+
 const data = {
   navMain: [
     {
@@ -36,12 +37,12 @@ const data = {
     },
     {
       title: "Shop",
-      url: "/user/shop/all-products",
+      url: "/user/shop/products",
       icon: Bot,
       items: [
         {
           title: "Manage Products",
-          url: "/user/shop/all-products",
+          url: "/user/shop/products",
         },
         {
           title: "Manage Categories",
