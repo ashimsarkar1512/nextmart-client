@@ -4,6 +4,8 @@ import ProductCard from "@/components/ui/core/ProductCard";
 import { getFlashSaleProducts } from "@/services/FlashSale";
 import { IProduct } from "@/types";
 import Link from "next/link";
+import CountDown from "./CountDown";
+
 
 const FlashSale= async () => {
   const { data: products } = await getFlashSaleProducts();
@@ -13,6 +15,7 @@ const FlashSale= async () => {
       <NMContainer className="my-16">
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-2xl">Flash Sale</h2>
+          <CountDown></CountDown>
           <Link href="/products">
             <Button variant="outline" className="rounded-full">
               All Collection
