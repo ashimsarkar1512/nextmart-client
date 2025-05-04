@@ -149,7 +149,7 @@ const ManageProducts = ({ products }: { products: IProduct[] }) => {
           >
             Add Product <Plus />
           </Button>
-          <DiscountModal selectedId={seletedId}></DiscountModal>
+          <DiscountModal selectedId={seletedId} setSelectedIds={setSelectedIds}></DiscountModal>
         </div>
       </div>
       <NMTable columns={columns} data={products || []} />
