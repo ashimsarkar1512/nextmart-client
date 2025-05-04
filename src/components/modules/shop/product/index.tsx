@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox"
 import { useState } from "react";
+import DiscountModal from "./DiscountModel";
 
 
 const ManageProducts = ({ products }: { products: IProduct[] }) => {
@@ -148,6 +149,7 @@ const ManageProducts = ({ products }: { products: IProduct[] }) => {
           >
             Add Product <Plus />
           </Button>
+          <DiscountModal selectedId={seletedId}></DiscountModal>
         </div>
       </div>
       <NMTable columns={columns} data={products || []} />
