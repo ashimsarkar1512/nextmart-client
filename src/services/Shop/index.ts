@@ -8,6 +8,7 @@ export const createShop = async (data: FormData) => {
       method: "POST",
       headers: {
         Authorization: (await cookies()).get("accessToken")!.value,
+
       },
       body: data,
     });

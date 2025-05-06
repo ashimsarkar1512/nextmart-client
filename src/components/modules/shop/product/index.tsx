@@ -61,13 +61,24 @@ const ManageProducts = ({ products }: { products: IProduct[] }) => {
       header: "Product Name",
       cell: ({ row }) => (
         <div className="flex items-center space-x-3">
-          <Image
-            src={row.original.imageUrls[0]}
-            alt={row.original.name}
-            width={40}
-            height={40}
-            className="w-8 h-8 rounded-full"
-          />
+       <div className="flex items-center space-x-3">
+  {row.original.imageUrls?.[0] ? (
+    <Image
+      src={row.original.imageUrls[0]}
+      alt={row.original.name}
+      width={40}
+      height={40}
+      className="w-8 h-8 rounded-full"
+    />
+  ) : (
+    <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-xs text-gray-500">
+      N/A
+    </div>
+  )}
+  <span className="truncate">{row.original.name}</span>
+</div>
+
+
           <span className="truncate">{row.original.name}</span>
         </div>
       ),

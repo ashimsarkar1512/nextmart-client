@@ -5,9 +5,9 @@ import { NMTable } from "@/components/ui/core/NMTable";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 import { Trash } from "lucide-react";
-import { deleteCategory } from "@/services/Category";
-import { toast } from "sonner";
 import { useState } from "react";
+import { toast } from "sonner";
+import { deleteCategory } from "@/services/Category";
 import DeleteConfirmationModal from "@/components/ui/core/NMModel/DeleteConfirmationModel";
 
 type TCategoriesProps = {
@@ -15,11 +15,9 @@ type TCategoriesProps = {
 };
 
 const ManageCategories = ({ categories }: TCategoriesProps) => {
-
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
-
 
   const handleDelete = (data: ICategory) => {
     console.log(data);
@@ -57,7 +55,7 @@ const ManageCategories = ({ categories }: TCategoriesProps) => {
             width={40}
             height={40}
             className="w-8 h-8 rounded-full"
-          /> 
+          />
           <span className="truncate">{row.original.name}</span>
         </div>
       ),

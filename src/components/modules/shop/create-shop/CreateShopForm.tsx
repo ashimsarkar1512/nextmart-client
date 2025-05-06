@@ -12,7 +12,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
-
 import NMImageUploader from "@/components/ui/core/NMImageUploader";
 import { useState } from "react";
 import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
@@ -46,10 +45,12 @@ export default function CreateShopForm() {
       const formData = new FormData();
       formData.append("data", JSON.stringify(modifiedData));
       formData.append("logo", imageFiles[0] as File);
+      console.log("Final FormData:", formData);
 
       const res = await createShop(formData);
 
-      console.log(res);
+      console.log("API Response:", res);
+   
 
       if (res.success) {
         toast.success(res.message);
