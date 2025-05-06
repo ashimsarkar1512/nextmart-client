@@ -1,19 +1,29 @@
+
+
+
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "../../button";
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
- const TablePagination = () => {
+ const TablePagination = ({totalPage}:{totalPage:number}) => {
+
 const [currentPage, setCurrentPage]=useState(1)
-            const totalPage=10;
+
+const router=useRouter();
+const pathname=usePathname()
+           
 
             const handlePrev=()=>{
                         if(currentPage>1){
                                     setCurrentPage(currentPage-1)
+                                    router.push(`${pathname}?page=${currentPage-1}`)
                         }
             }
             const handleNext=()=>{
                         if(currentPage<totalPage){
                                     setCurrentPage(currentPage+1)
+                                    router.push(`${pathname}?page=${currentPage+1}`)
                         }
             }
             return (
@@ -32,7 +42,12 @@ const [currentPage, setCurrentPage]=useState(1)
                                                             variant={currentPage===index+1?"default":"outline"}
                                                             
                                                             size="sm"  className="w-8 h-8 rounded-full flex justify-center items-center"
-                                                            onClick={()=>setCurrentPage(index+1)} key={index}>
+                                                            onClick={()=>{
+                                                              
+                                                              
+                                                              setCurrentPage(index+1)
+                                                              router.push(`${pathname}?page=${index+1}`)
+                                                              }} key={index}>
                                                           {index+1}
                                                                              </Button>   
                                                 ))
@@ -50,3 +65,4 @@ const [currentPage, setCurrentPage]=useState(1)
 };
 
 export default TablePagination;
+
