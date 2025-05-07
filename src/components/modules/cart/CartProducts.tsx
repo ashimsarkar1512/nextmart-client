@@ -2,6 +2,7 @@ import Image from "next/image";
 import emptyCart from "@/assets/empty-cart.png";
 import { getAllProducts } from "@/services/Product";
 import { IProduct } from "@/types";
+import CartProductCard from "./CartProductCard";
 export default async function CartProducts() {
   const { data: products } = await getAllProducts();
 
