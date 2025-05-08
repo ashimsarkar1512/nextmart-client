@@ -1,9 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { IProduct } from "@/types";
+import { cartProduct, decrementOrderQuatity, IncrementOrderQuatity, removeProduct } from "@/redux/features/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { Minus, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 
-export default function CartProductCard({ product }: { product: IProduct }) {
+export default function CartProductCard({ product }: { product:cartProduct  }) {
+
+  const dispatch=useAppDispatch();
+
+  const handleIncrementQuantity=(id:string)=>{
+    dispatch(IncrementOrderQuatity(id))
+  }
+  const handledecrementQuantity=(id:string)=>{
+    dispatch(decrementOrderQuatity(id))
+  }
+  const handledeRemoveQuantity=(id:string)=>{
+    dispatch(removeProduct(id))
+  }
+
   return (
     <div className="bg-white rounded-lg flex p-5 gap-5">
       <div className="h-full w-32 rounded-md overflow-hidden">
@@ -35,16 +49,16 @@ export default function CartProductCard({ product }: { product: IProduct }) {
           </h2>
           <div className="flex items-center gap-2">
             <p className="text-gray-500 font-semibold">Quantity</p>
-            <Button variant="outline" className="size-8 rounded-sm">
+            <Button onClick={()=>handledecrementQuantity(product._id)} variant="outline" className="size-8 rounded-sm">
               <Minus />
             </Button>
             <p className="font-semibold text-xl p-2">
-              {/* {product?.orderQuantity} */}1
+              {product?.orderQuantity}1
             </p>
-            <Button variant="outline" className="size-8 rounded-sm">
+            <Button onClick={()=>handleIncrementQuantity(product._id)} variant="outline" className="size-8 rounded-sm">
               <Plus />
             </Button>
-            <Button variant="outline" className="size-8 rounded-sm">
+            <Button onClick={()=>handledeRemoveQuantity(product._id)} variant="outline" className="size-8 rounded-sm">
               <Trash className="text-red-500/50" />
             </Button>
           </div>

@@ -56,10 +56,13 @@ export default function Navbar() {
           <Button variant="outline" className="rounded-full p-0 size-10">
             <Heart />
           </Button>
+          <Link href="/cart">
           <Button variant="outline" className="rounded-full p-0 size-10">
             <ShoppingBag />
           </Button>
          
+          </Link>
+          
           {user ? (
             <>
               <Link href="/create-shop">
