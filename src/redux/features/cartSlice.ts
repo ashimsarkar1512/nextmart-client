@@ -10,10 +10,14 @@ import { RootState } from "../store";
 }
 interface InitialState{
             products:cartProduct[];
+            city:string;
+            shoppingAddress:string
 }
 
 const initialState:InitialState={
             products:[],
+            city:"",
+            shoppingAddress:""
 }
 
 
@@ -57,14 +61,44 @@ const cartSlice=createSlice({
                        
                         removeProduct:(state,action)=>{
                  state.products=state.products.filter((product)=>product._id!==action.payload)
-                        }
+                        },
+
+                   updateCity:(state,action)=>{
+                    state.city=action.payload
+                   },
+
+                   upadateShoppingAddress:(state,action)=>{
+                  state.shoppingAddress=action.payload
+                   }
+
+                        
             }
+
+          
 })
 
 
 export const orderedProductCollector=(state:RootState)=>{
             return state.cart.products
 }
-export const {addProduct,IncrementOrderQuatity,decrementOrderQuatity,removeProduct}=cartSlice.actions
+export const subTotalSeclector=(state:RootState)=>{
+  return state.cart.products.reduce((acc,product)=>{
+    if(product.offerPrice){
+      return acc+product.offerPrice*product.orderQuantity
+    }
+    else{
+      return acc+product.price*product.orderQuantity
+    }
+  },0)
+}
+
+export const citySeclector=(state:RootState)=>{
+ return state.cart.city
+}
+
+export const shoppingAddressSelector=(state:RootState)=>{
+return state.cart.shoppingAddress
+}
+export const {addProduct,IncrementOrderQuatity,decrementOrderQuatity,removeProduct,updateCity,upadateShoppingAddress}=cartSlice.actions
 
 export default cartSlice.reducer;
