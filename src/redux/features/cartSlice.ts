@@ -92,12 +92,35 @@ export const subTotalSeclector=(state:RootState)=>{
   },0)
 }
 
+export const shoppingCostSelector=(state:RootState)=>{
+  if(state.cart.city && state.cart.city==="Dhaka" && state.cart.products.length>0){
+    return 60;
+  }else if(state.cart.city && state.cart.city!=="Dhaka" && state.cart.products.length>0){
+    return 120;
+  }
+  else{
+    return 0;
+  }
+
+}
 export const citySeclector=(state:RootState)=>{
  return state.cart.city
 }
 
 export const shoppingAddressSelector=(state:RootState)=>{
 return state.cart.shoppingAddress
+}
+
+export const orderSelector=(state:RootState)=>{
+   return{
+    products:state.cart.products.map((product)=>({
+      product:product._id,
+      quaitity:product.orderQuantity
+    })),
+
+     shoppingAddress:`${state.cart.shoppingAddress}-${state.cart.city}`,
+     paymentMethod:"online"
+   }
 }
 export const {addProduct,IncrementOrderQuatity,decrementOrderQuatity,removeProduct,updateCity,upadateShoppingAddress}=cartSlice.actions
 
