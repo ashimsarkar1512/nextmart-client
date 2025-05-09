@@ -23,7 +23,7 @@ export default  function CartProducts() {
           </div>
         </div>
       )}
-      {products.map((product: IProduct) => (
+      {products?.map((product: IProduct) => (
         <CartProductCard key={product._id} product={product} />
       ))}
     </div>
