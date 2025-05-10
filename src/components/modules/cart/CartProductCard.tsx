@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { currencyFormatter } from "@/lib/currencyFormatter";
 import { cartProduct, decrementOrderQuatity, IncrementOrderQuatity, removeProduct } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { Minus, Plus, Trash } from "lucide-react";
@@ -45,7 +46,7 @@ export default function CartProductCard({ product }: { product:cartProduct  }) {
         <div className="flex items-center justify-between">
           <h2>
             Price:
-            {product.offerPrice ? product.offerPrice : product.price}
+            {product.offerPrice ? currencyFormatter(product.offerPrice) : currencyFormatter(product.price)}
           </h2>
           <div className="flex items-center gap-2">
             <p className="text-gray-500 font-semibold">Quantity</p>
