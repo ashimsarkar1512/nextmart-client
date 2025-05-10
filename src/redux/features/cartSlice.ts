@@ -122,6 +122,12 @@ export const orderSelector=(state:RootState)=>{
      paymentMethod:"online"
    }
 }
+
+ export const grandTotalSelector=(state:RootState)=>{
+  const subTotal=subTotalSeclector(state)
+  const shoppingCost=shoppingCostSelector(state)
+  return subTotal+shoppingCost
+ } 
 export const {addProduct,IncrementOrderQuatity,decrementOrderQuatity,removeProduct,updateCity,upadateShoppingAddress}=cartSlice.actions
 
 export default cartSlice.reducer;
